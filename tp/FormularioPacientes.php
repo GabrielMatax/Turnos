@@ -109,4 +109,12 @@
  //   $conn->close();
     ?>
 </body>
+<footer>
+        <h3>Donde nos ubicamos</h3>
+        <p>Avenida Cudi 123, Las Bahamas</p>
+        <h3>Contactos</h3>
+        <p>(408) 555-1234</p>
+        <p>clinicaSinchy@Yahoo.com</p>
+        <div id="contacto"></div>
+    </footer>
 </html>

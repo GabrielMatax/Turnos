@@ -4,11 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario turno</title>
-    <link rel="stylesheet" href=".style/style.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/formTurnos.css">
 </head>
 <body>
-
-    <a href="index.php">Home</a>
+<header>
+        <div class="banner">
+            <img src="./img/logo.png" alt="logo">
+            <h1 class="titulo">Clinica Modelo Sinchy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a> </li>
+                <li><a href="FormularioPacientes.php">Pacientes</a></li>
+                <li><a href="#">Turnos</a></li>
+                <li><a href="./FormularioMedicos.php">Formulario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
     
     <?php
     include 'Conexion.php';
@@ -108,4 +122,12 @@
     $conn->close();
     ?>
 </body>
+<footer>
+        <h3>Donde nos ubicamos</h3>
+        <p>Avenida Cudi 123, Las Bahamas</p>
+        <h3>Contactos</h3>
+        <p>(408) 555-1234</p>
+        <p>clinicaSinchy@Yahoo.com</p>
+        <div id="contacto"></div>
+    </footer>
 </html>
