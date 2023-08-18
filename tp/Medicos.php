@@ -13,7 +13,7 @@ class Medico {
     }
 
     public function crearMedico($apellidoNombre, $domicilio, $especialidad, $disponibilidad, $dni) {
-        $sql = "INSERT INTO medicos (apellido_nombre, domicilio, especialidad, disponibilidad, dni)
+        $sql = "INSERT INTO medicos (apellido_nombre, domicilio, especialidad_id, disponibilidad, dni)
                 VALUES ('$apellidoNombre', '$domicilio', '$especialidad', '$disponibilidad', '$dni')";
 
         if ($this->conn->query($sql) === true) {
@@ -24,7 +24,10 @@ class Medico {
     }
 
     public function obtenerMedicos() {
-        $sql = "SELECT * FROM medicos";
+        $sql = "SELECT medicos.id, medicos.apellido_nombre, medicos.domicilio, especialidad.nombre AS especialidad_nombre,
+                medicos.disponibilidad, medicos.dni
+                FROM medicos
+                LEFT JOIN especialidad ON medicos.especialidad_id = especialidad.id";
         $result = $this->conn->query($sql);
 
         $medicos = array();

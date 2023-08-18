@@ -69,6 +69,17 @@
                 }
             ?>
             </select><br>
+            <label>Especialidad:</label>
+            <select name="especialidad_id">
+            <?php
+                $especialidades = $especialidad->obtenerEspecialidades();
+
+                foreach ($especialidades as $esp) {
+                    echo "<option value='" . $esp["id"] . "'>" . $esp["nombre"] . "</option>";
+                }
+            ?>
+        </select><br>
+
             <br>
             
             <label>Fecha y Hora:</label>

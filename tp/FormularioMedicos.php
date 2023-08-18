@@ -15,17 +15,19 @@
     <?php 
     include 'Conexion.php';
     include 'Medicos.php';
+    include 'Especialidades.php'; 
     $medico = new Medico($conn);
+    $especialidad = new Especialidad($conn);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $apellidoNombre = $_POST["apellido_nombre"];
         $domicilio = $_POST["domicilio"];
-        $especialidad = $_POST["especialidad"];
+        $especialidadId = $_POST["especialidad_id"];
         $disponibilidad = $_POST["disponibilidad"];
         $dni = $_POST["dni"];
 
-        if ($medico->crearMedico($apellidoNombre, $domicilio, $especialidad, $disponibilidad, $dni)) {
-            echo "Paciente creado exitosamente.";
+        if ($medico->crearMedico($apellidoNombre, $domicilio, $especialidadId, $disponibilidad, $dni)) {
+            echo "Medico creado exitosamente.";
         } else {
             echo "Error al crear paciente.";
         }
@@ -36,7 +38,7 @@
         $medicoId = $_GET["id"];
     
         if ($medico->eliminarMedico($medicoId)) {
-            echo "Paciente eliminado exitosamente.";
+            echo "Medico eliminado exitosamente.";
         } else {
             echo "Error al eliminar paciente.";
         }
@@ -54,8 +56,20 @@
         <input type="text" name="domicilio"><br>
         
         <label>Especialidad:</label>
-        <input type="text" name="especialidad"><br>
-        
+        <select name="especialidad_id">
+                <?php
+                $especialidades = $especialidad->obtenerEspecialidades();
+
+                foreach ($especialidades as $esp) {
+                    echo "<option value='" . $esp["id"] . "'>" . $esp["nombre"] . "</option>";
+                }
+                ?>
+                <!-- <option>Traumatologia</option>
+                <option>Pediatria</option>
+                <option>Radiologia</option>
+                <option>Nose</option> -->
+
+        </select><br>
         <label>Disponibilidad:</label>
         <input type="text" name="disponibilidad"><br>
         
@@ -66,26 +80,37 @@
     </form>
 
     <h2>Listado de Médicos</h2>
-
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Apellido y Nombre</th>
+            <th>Domicilio</th>
+            <th>Especialidad</th>
+            <th>Disponibilidad</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
     <?php
     if (empty($medicos)) {
         echo "No se encontraron médicos.";
     } else {
         foreach ($medicos as $med) {
-            echo "ID: " . $med["id"] . "<br>";
-            echo "Apellido y Nombre: " . $med["apellido_nombre"] . "<br>";
-            echo "Domicilio: " . $med["domicilio"] . "<br>";
-            echo "Especialidad: " . $med["especialidad"] . "<br>";
-            echo "Disponibilidad: " . $med["disponibilidad"] . "<br>";
-            echo "DNI: " . $med["dni"] . "<br>";
+            echo "<tr>";
+            echo "<td>" . $med["id"] . "</td>";
+            echo "<td>" . $med["apellido_nombre"] . "</td>";
+            echo "<td>" . $med["domicilio"] . "</td>";
+            echo "<td>" . $med["especialidad_nombre"] . "</td>";
+            echo "<td>" . $med["disponibilidad"] . "</td>";
+            echo "<td>" . $med["dni"] . "</td>";;
             echo "<td><a href='EditarMedicos.php?id=" . $med["id"] . "'>Editar</a> | <a href='FormularioMedicos.php?id=" . $med["id"] . "'>Eliminar</a></td>";
-            echo "-----------------------------------<br>";
+            echo "</tr>";
         }
     }
 
     $conn->close();
 
     ?>
+    </table>
     
     </section>
     <footer>
