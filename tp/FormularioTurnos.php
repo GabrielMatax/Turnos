@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario turno</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/formTurnos.css">
 </head>
 <body>
 
-    <a href="index.php">Home</a>
+<header>
+        <div class="banner">
+            <img src="./img/logo.png" alt="logo">
+            <h1 class="titulo">Clinica Modelo Sinchy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a> </li>
+                <li><a href="FormularioPacientes.php">Pacientes</a></li>
+                <li><a href="#">Turnos</a></li>
+                <li><a href="./FormularioMedicos.php">Formulario</a></li>
+                <li><a href="contacto">Contacto</a></li>
+            </ul>
+        </nav>
+</header>
     
     <?php
     include 'Conexion.php';
@@ -30,7 +46,6 @@
         $medicoInfo = $medico->obtenerMedicoPorId($medicoId);
         $especialidadMedico = $especialidad->obtenerEspecialidadPorId($medicoInfo["especialidad_id"])["nombre"];
 
-        // Verificar disponibilidad directamente en el objeto Medico
         if ($medico->verificarDisponibilidad($medicoId, $fechaHora)) {
             $medicoInfo = $medico->obtenerMedicoPorId($medicoId);
             $especialidadMedico = $especialidad->obtenerEspecialidadPorId($medicoInfo["especialidad_id"])["nombre"];
@@ -96,8 +111,16 @@
             ?>
             </select><br>
             
-            <label>Fecha y Hora:</label>
-            <input type="text" name="fecha_hora"><br>
+            <label>Día:</label>
+            <select name="fecha_hora">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+            </select><br>>
             
             <input type="submit" value="Sacar Turno">
         </form>
@@ -112,7 +135,7 @@
         foreach ($turnosAsignados as $turno) {
             echo "ID Turno: " . $turno["id"] . "<br>";
             echo "Paciente: " . $turno["paciente_nombre"] . "<br>";
-            echo "Fecha y Hora: " . $turno["fecha_hora"] . "<br>";
+            echo "Día: " . $turno["fecha_hora"] . "<br>";
             echo "Médico: " . $turno["medico_nombre"] . "<br>";
 
             echo "<td><a href='FormularioTurnos.php?id=" . $turno["id"] . "'>Eliminar</a></td>";
@@ -120,5 +143,14 @@
     }
     $conn->close();
     ?>
+
+<footer>
+        <h3>Donde nos ubicamos</h3>
+        <p>Avenida Cudi 123, Las Bahamas</p>
+        <h3>Contactos</h3>
+        <p>(408) 555-1234</p>
+        <p>clinicaSinchy@Yahoo.com</p>
+        <div id="contacto"></div>
+</footer>
 </body>
 </html>

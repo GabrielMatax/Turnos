@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/formMedicos.css">
     <title>Formulario</title>
 </head>
 <body>
     <header>
-        <h1>FORMULARIO</h1>
-        <a href="index.php">Home</a>
+    <div class="banner">
+            <img src="./img/logo.png" alt="logo">
+            <h1 class="titulo">Clinica Modelo Sinchy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./index.php">Home</a> </li>
+                <li><a href="./FormularioPacientes.php">Pacientes</a></li>
+                <li><a href="./FormularioTurnos.php">Turnos</a></li>
+                <li><a href="./FormularioMedicos.php">Formulario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
     <section>   
     <?php 
@@ -69,8 +82,16 @@
                 ?>
 
         </select><br>
-        <label>Disponibilidad:</label>
-        <input type="text" name="disponibilidad"><br>
+        <label>Día:</label>
+            <select name="disponibilidad">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+            </select><br>>
         
         <label>DNI:</label>
         <input type="text" name="dni"><br>
@@ -87,6 +108,7 @@
             <th>Especialidad</th>
             <th>Disponibilidad</th>
             <th>DNI</th>
+            <th> &nbsp;&nbsp;&nbsp;&nbsp; </th>
             <th>Acciones</th>
         </tr>
     <?php
@@ -101,6 +123,7 @@
             echo "<td>" . $med["especialidad_nombre"] . "</td>";
             echo "<td>" . $med["disponibilidad"] . "</td>";
             echo "<td>" . $med["dni"] . "</td>";;
+            echo "<td>"  .  "</td>";
             echo "<td><a href='EditarMedicos.php?id=" . $med["id"] . "'>Editar</a> | <a href='FormularioMedicos.php?id=" . $med["id"] . "'>Eliminar</a></td>";
             echo "</tr>";
         }
@@ -113,7 +136,12 @@
     
     </section>
     <footer>
-
+        <h3>Donde nos ubicamos</h3>
+            <p>Avenida Cudi 123, Las Bahamas</p>
+            <h3>Contactos</h3>
+            <p>(408) 555-1234</p>
+            <p>clinicaSinchy@Yahoo.com</p>
+            <div id="contacto"></div>
     </footer>
 </body>
 </html>

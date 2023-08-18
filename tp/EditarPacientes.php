@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Editar Paciente</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/formTurnos.css">
 </head>
 <body>
     <a href="FormularioPacientes.php">ATRAS</a>
@@ -10,7 +12,7 @@ include 'Pacientes.php';
 include 'Conexion.php';
 
 $paciente = new Paciente($conn);
-$pacienteInfo = array(); // Inicializa la variable para evitar los errores
+$pacienteInfo = array(); 
 $message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {

@@ -2,11 +2,27 @@
 <html>
 <head>
     <title>Gestión de Pacientes</title>
+    <link rel="stylesheet" href="./style/formPacientes.css">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+<header>
+        <div class="banner">
+            <img src="./img/logo.png" alt="logo">
+            <h1 class="titulo">Clinica Modelo Sinchy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a> </li>
+                <li><a href="FormularioPacientes.php">Pacientes</a></li>
+                <li><a href="FormularioTurnos.php">Turnos</a></li>
+                <li><a href="./FormularioMedicos.php">Formulario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <a href="index.php">Home</a>
-    <h1>Gestión de Pacientes</h1>
+    <h1 class="titulo">Gestión de Pacientes</h1>
     
     <?php
     include 'Pacientes.php';
@@ -73,6 +89,7 @@
             <th>Domicilio</th>
             <th>DNI</th>
             <th>Teléfono</th>
+            <th> &nbsp;&nbsp;&nbsp;&nbsp; </th>
             <th>Acciones</th>
         </tr>
         <?php
@@ -84,6 +101,7 @@
             echo "<td>" . $pac["domicilio"] . "</td>";
             echo "<td>" . $pac["dni"] . "</td>";
             echo "<td>" . $pac["telefono"] . "</td>";
+            echo "<td>"  .  "</td>";
             echo "<td><a href='EditarPacientes.php?id=" . $pac["id"] . "'>Editar</a> | <a href='FormularioPacientes.php?id=" . $pac["id"] . "'>Eliminar</a></td>";
             echo "</tr>";
         }
@@ -92,5 +110,14 @@
     <?php
  //   $conn->close();
     ?>
+
+<footer>
+        <h3>Donde nos ubicamos</h3>
+        <p>Avenida Cudi 123, Las Bahamas</p>
+        <h3>Contactos</h3>
+        <p>(408) 555-1234</p>
+        <p>clinicaSinchy@Yahoo.com</p>
+        <div id="contacto"></div>
+    </footer>
 </body>
 </html>
