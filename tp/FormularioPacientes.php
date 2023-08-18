@@ -89,6 +89,7 @@
             <th>Domicilio</th>
             <th>DNI</th>
             <th>Teléfono</th>
+            <th> &nbsp;&nbsp;&nbsp;&nbsp; </th>
             <th>Acciones</th>
         </tr>
         <?php
@@ -100,6 +101,7 @@
             echo "<td>" . $pac["domicilio"] . "</td>";
             echo "<td>" . $pac["dni"] . "</td>";
             echo "<td>" . $pac["telefono"] . "</td>";
+            echo "<td>"  .  "</td>";
             echo "<td><a href='EditarPacientes.php?id=" . $pac["id"] . "'>Editar</a> | <a href='FormularioPacientes.php?id=" . $pac["id"] . "'>Eliminar</a></td>";
             echo "</tr>";
         }
@@ -108,6 +110,15 @@
     <?php
  //   $conn->close();
     ?>
+
+<footer>
+        <h3>Donde nos ubicamos</h3>
+        <p>Avenida Cudi 123, Las Bahamas</p>
+        <h3>Contactos</h3>
+        <p>(408) 555-1234</p>
+        <p>clinicaSinchy@Yahoo.com</p>
+        <div id="contacto"></div>
+    </footer>
 </body>
 <footer>
         <h3>Donde nos ubicamos</h3>

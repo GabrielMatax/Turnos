@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Editar medico</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/formTurnos.css">
 </head>
 <body>
     <a href="FormularioMedicos.php">ATRAS</a>

@@ -93,17 +93,6 @@ class Medico {
         }
     }
 
-    
-   /* public function verificarDisponibilidad($medicoId, $fechaHora) {
-        $sql = "SELECT * FROM disponibilidad
-                WHERE medico_id = $medicoId
-                AND fecha_hora = '$fechaHora'";
-        
-        $result = $this->conn->query($sql);
-    
-        return ($result->num_rows > 0); // Retorna true si el médico está disponible, false si no lo está
-    }*/
-    
     public function verificarDisponibilidad($medicoId, $fechaHora) {
         $sql = "SELECT disponibilidad FROM medicos
                 WHERE id = $medicoId";

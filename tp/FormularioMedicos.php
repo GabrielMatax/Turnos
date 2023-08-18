@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/formMedicos.css">
     <title>Formulario</title>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/formMedicos.css">
@@ -84,8 +86,16 @@
                 ?>
 
         </select><br>
-        <label>Disponibilidad:</label>
-        <input type="text" name="disponibilidad"><br>
+        <label>Día:</label>
+            <select name="disponibilidad">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+            </select><br>>
         
         <label>DNI:</label>
         <input type="text" name="dni"><br>
@@ -102,6 +112,7 @@
             <th>Especialidad</th>
             <th>Disponibilidad</th>
             <th>DNI</th>
+            <th> &nbsp;&nbsp;&nbsp;&nbsp; </th>
             <th>Acciones</th>
         </tr>
     <?php
@@ -116,6 +127,7 @@
             echo "<td>" . $med["especialidad_nombre"] . "</td>";
             echo "<td>" . $med["disponibilidad"] . "</td>";
             echo "<td>" . $med["dni"] . "</td>";;
+            echo "<td>"  .  "</td>";
             echo "<td><a href='EditarMedicos.php?id=" . $med["id"] . "'>Editar</a> | <a href='FormularioMedicos.php?id=" . $med["id"] . "'>Eliminar</a></td>";
             echo "</tr>";
         }

@@ -16,9 +16,9 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a> </li>
+                <li><a href="FormularioTurnos.php">Sacar Turno</a></li>
                 <li><a href="FormularioPacientes.php">Pacientes</a></li>
-                <li><a href="FormularioTurnos.php">Turnos</a></li>
-                <li><a href="./FormularioMedicos.php">Formulario</a></li>
+                <li><a href="./FormularioMedicos.php">Medicos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
