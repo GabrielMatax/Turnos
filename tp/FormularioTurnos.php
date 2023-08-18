@@ -29,22 +29,37 @@
     include 'Pacientes.php';
     include 'Turnos.php';
     include 'Medicos.php';
+    include 'Especialidades.php';
 
     $paciente = new Paciente($conn);
     $turno = new Turno($conn);
     $medico = new Medico($conn);
+    $especialidad = new Especialidad($conn);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $medicoId = $_POST["medico_id"];
         $fechaHora = $_POST["fecha_hora"];
         $pacienteId = $_POST["paciente_id"];
+        $especialidadId = $_POST["especialidad_id"]; // Obtener la especialidad seleccionada
+
+        $medicoInfo = $medico->obtenerMedicoPorId($medicoId);
+        $especialidadMedico = $especialidad->obtenerEspecialidadPorId($medicoInfo["especialidad_id"])["nombre"];
 
         // Verificar disponibilidad directamente en el objeto Medico
         if ($medico->verificarDisponibilidad($medicoId, $fechaHora)) {
-            if ($paciente->sacarTurno($medicoId, $pacienteId,$fechaHora)) {
-                echo "Turno asignado exitosamente.";
+            $medicoInfo = $medico->obtenerMedicoPorId($medicoId);
+            $especialidadMedico = $especialidad->obtenerEspecialidadPorId($medicoInfo["especialidad_id"])["nombre"];
+            
+            $especialidadSeleccionada = $especialidad->obtenerEspecialidadPorId($especialidadId)["nombre"];
+            
+            if ($especialidadMedico === $especialidadSeleccionada) {
+                if ($paciente->sacarTurno($medicoId, $pacienteId, $fechaHora, $especialidadId)) {
+                    echo "Turno asignado exitosamente.";
+                } else {
+                    echo "Error al asignar turno.";
+                }
             } else {
-                echo "Error al asignar turno.";
+                echo "El médico no tiene la especialidad seleccionada.";
             }
         } else {
             echo "El médico no está disponible en la fecha y hora seleccionadas.";
@@ -64,16 +79,27 @@
 
 <section>
     <form action="FormularioTurnos.php" method="post">
+            <label>Seleccionar Especialidad:</label>
+            <select autofocus name="especialidad_id">
+            <?php
+                $especialidades = $especialidad->obtenerEspecialidades();
+
+                foreach ($especialidades as $esp) {
+                    echo "<option value='" . $esp["id"] . "'>" . $esp["nombre"] . "</option>";
+                }
+            ?>
+            </select>
             <label>Seleccionar Médico:</label>
-            <select autofocus name="medico_id">
+             <select autofocus name="medico_id">
             <?php
                 $medicos = $medico->obtenerMedicos();
 
                 foreach ($medicos as $med) {
-                    echo "<option value='" . $med["id"] . "'>" . $med["apellido_nombre"] . "</option>";
+                    echo "<option value='" . $med["id"] . "'>" . $med["apellido_nombre"] ."  (".$med["especialidad_nombre"] .")</option>";
                 }
             ?>
             </select><br>
+
             <label>Paciente:</label>
             <select name="paciente_id">
             <?php
@@ -84,18 +110,6 @@
                 }
             ?>
             </select><br>
-            <label>Especialidad:</label>
-            <select name="especialidad_id">
-            <?php
-                $especialidades = $especialidad->obtenerEspecialidades();
-
-                foreach ($especialidades as $esp) {
-                    echo "<option value='" . $esp["id"] . "'>" . $esp["nombre"] . "</option>";
-                }
-            ?>
-        </select><br>
-
-            <br>
             
             <label>Fecha y Hora:</label>
             <input type="text" name="fecha_hora"><br>

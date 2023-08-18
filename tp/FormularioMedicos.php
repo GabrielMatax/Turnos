@@ -33,6 +33,9 @@
     include 'Especialidades.php'; 
     $medico = new Medico($conn);
     $especialidad = new Especialidad($conn);
+    
+    // $especialidad->crearEspecialidad();
+     
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $apellidoNombre = $_POST["apellido_nombre"];
@@ -79,10 +82,6 @@
                     echo "<option value='" . $esp["id"] . "'>" . $esp["nombre"] . "</option>";
                 }
                 ?>
-                <!-- <option>Traumatologia</option>
-                <option>Pediatria</option>
-                <option>Radiologia</option>
-                <option>Nose</option> -->
 
         </select><br>
         <label>Disponibilidad:</label>

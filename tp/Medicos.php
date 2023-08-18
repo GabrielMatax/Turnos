@@ -50,12 +50,26 @@ class Medico {
             return null;
         }
     }
+    public function obtenerMedicosPorEspecialidad($especialidadId) {
+        $sql = "SELECT * FROM medicos WHERE especialidad_id = $especialidadId";
+        
+        $result = $this->conn->query($sql);
+        
+        $medicos = array();
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $medicos[] = $row;
+            }
+        }
+        
+        return $medicos;
+    }
 
-    public function actualizarMedico($id, $apellidoNombre, $domicilio, $especialidad, $disponibilidad, $dni) {
+    public function actualizarMedico($id, $apellidoNombre, $domicilio, $disponibilidad, $dni) {
         $sql = "UPDATE medicos SET 
                 apellido_nombre = '$apellidoNombre',
                 domicilio = '$domicilio',
-                especialidad = '$especialidad',
                 disponibilidad = '$disponibilidad',
                 dni = '$dni'
                 WHERE id = $id";
