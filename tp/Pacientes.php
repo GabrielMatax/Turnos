@@ -63,7 +63,7 @@
             $this->conn->query($sqlDeleteTurnos);
             $sql = "DELETE FROM pacientes WHERE id = $id";
     
-            if ($this->conn->query($sql) === true) {
+            if ($this->conn->query( $sql) ===true) {
                 return true;
             } else {
                 return false;
