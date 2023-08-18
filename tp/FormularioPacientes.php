@@ -2,11 +2,27 @@
 <html>
 <head>
     <title>Gestión de Pacientes</title>
+    <link rel="stylesheet" href="./style/formPacientes.css">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+<header>
+        <div class="banner">
+            <img src="./img/logo.png" alt="logo">
+            <h1 class="titulo">Clinica Modelo Sinchy</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a> </li>
+                <li><a href="FormularioPacientes.php">Pacientes</a></li>
+                <li><a href="FormularioTurnos.php">Turnos</a></li>
+                <li><a href="./FormularioMedicos.php">Formulario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <a href="index.php">Home</a>
-    <h1>Gestión de Pacientes</h1>
+    <h1 class="titulo">Gestión de Pacientes</h1>
     
     <?php
     include 'Pacientes.php';
