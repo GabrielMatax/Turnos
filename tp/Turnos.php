@@ -10,10 +10,12 @@
                 }
             
                 public function obtenerTurnos() {
-                    $sql = "SELECT turnos.id, turnos.fecha_hora, medicos.apellido_nombre AS medico_nombre
+                    $sql = "SELECT turnos.id, turnos.fecha_hora, turnos.paciente_id, medicos.apellido_nombre AS medico_nombre,
+                            pacientes.nombre AS paciente_nombre
                             FROM turnos
                             LEFT JOIN medicos ON turnos.medico_id = medicos.id
-                            WHERE turnos.paciente_id IS NULL";
+                            LEFT JOIN pacientes ON turnos.paciente_id = pacientes.id
+                            WHERE turnos.paciente_id IS NOT NULL";
             
                     $result = $this->conn->query($sql);
             

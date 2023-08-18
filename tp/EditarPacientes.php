@@ -4,11 +4,14 @@
     <title>Editar Paciente</title>
 </head>
 <body>
+    <a href="FormularioPacientes.php">ATRAS</a>
 <?php
 include 'Pacientes.php';
 include 'Conexion.php';
 
 $paciente = new Paciente($conn);
+$pacienteInfo = array(); // Inicializa la variable para evitar los errores
+$message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     $pacienteId = $_POST["id"];
@@ -30,10 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
         die("Paciente no encontrado.");
     }
 }
-
 ?>
 
     <h1>Editar Paciente</h1>
+    <?php
+    $volver="./FormularioPacientes.php";
+    if (!empty($message)) {
+        echo "<p>$message</p>";
+    } elseif (!empty($pacienteInfo)) {
+    ?>
+
     <form action="EditarPacientes.php" method="post">
         <input type="hidden" name="id" value="<?php echo $pacienteInfo["id"]; ?>">
         <label>Nombre:</label>
@@ -48,5 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
         <input type="text" name="telefono" value="<?php echo $pacienteInfo["telefono"]; ?>"><br>
         <input type="submit" value="Guardar Cambios">
     </form>
+
+    <?php
+    
+    } else {
+       echo "<a href=".$volver.">Home</a>";
+    }
+    ?>
 </body>
 </html>

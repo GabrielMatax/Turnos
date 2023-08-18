@@ -37,6 +37,16 @@ class Medico {
 
         return $medicos;
     }
+    public function obtenerMedicoPorId($id) {
+        $sql = "SELECT * FROM medicos WHERE id = $id";
+        $result = $this->conn->query($sql);
+    
+        if ($result->num_rows == 1) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
 
     public function actualizarMedico($id, $apellidoNombre, $domicilio, $especialidad, $disponibilidad, $dni) {
         $sql = "UPDATE medicos SET 
