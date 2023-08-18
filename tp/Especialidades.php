@@ -6,16 +6,15 @@ class Especialidad {
         $this->conn = $conn;
     }
 
-    public function crearEspecialidad($nombre) {
-        $nombre = $this->conn->real_escape_string($nombre);
-
-        $sql = "INSERT INTO especialidad (nombre) VALUES ('$nombre')";
-        if ($this->conn->query($sql)) {
-            return $this->conn->insert_id;
-        } else {
-            return false;
-        }
-    }
+    // public function crearEspecialidad() {
+    //     $especialidades = ["Traumatología", "Pediatría", "Cardiología", "Dermatología", "Oftalmología"];
+    
+    //     foreach ($especialidades as $esp) {
+    //         $sql = "INSERT INTO especialidad (nombre) VALUES ('$esp')";
+    
+    //         $this->conn->query($sql)
+    //     }
+    // }
 
     public function obtenerEspecialidades() {
         $sql = "SELECT * FROM especialidad";
@@ -30,6 +29,26 @@ class Especialidad {
         }
 
         return $especialidades;
+    }
+    public function obtenerEspecialidadPorId($especialidadId) {
+        $sql = "SELECT * FROM especialidad WHERE id = $especialidadId";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows == 1) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
+    public function eliminarEspecialidad($id) {
+        $sql = "DELETE FROM especialidad WHERE id = $id";
+
+        if ($this->conn->query($sql) === true) {
+            return true;
+        } else {
+            return false;
+        }
     }
     // public function obtenerNombreEspecialidad($id) {
     //     $sql = "SELECT nombre FROM especialidad WHERE id = $id";

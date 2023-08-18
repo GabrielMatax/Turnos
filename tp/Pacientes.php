@@ -70,10 +70,10 @@
             }
         }
 
-        public function sacarTurno($medicoId , $paciD,$fechaHora) {   
-            $sql = "INSERT INTO turnos (medico_id, paciente_id, fecha_hora)
-                    VALUES ('$medicoId','$paciD' ,'$fechaHora')";
-
+        public function sacarTurno($medicoId, $paciD, $fechaHora, $especialidadId) {
+            $sql = "INSERT INTO turnos (medico_id, paciente_id, fecha_hora, especialidad_id)
+                    VALUES ('$medicoId', '$paciD', '$fechaHora', '$especialidadId')";
+        
             if ($this->conn->query($sql) === true) {
                 return true;
             } else {
