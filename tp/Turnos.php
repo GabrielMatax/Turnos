@@ -10,10 +10,10 @@
                 }
             
                 public function obtenerTurnos() {
-                    $sql = "SELECT t.id, t.fecha_hora, m.apellido_nombre AS medico_nombre
-                            FROM turnos t
-                            LEFT JOIN medicos m ON t.medico_id = m.id
-                            WHERE t.paciente_id IS NOT NULL";
+                    $sql = "SELECT turnos.id, turnos.fecha_hora, medicos.apellido_nombre AS medico_nombre
+                            FROM turnos
+                            LEFT JOIN medicos ON turnos.medico_id = medicos.id
+                            WHERE turnos.paciente_id IS NULL";
             
                     $result = $this->conn->query($sql);
             
@@ -28,10 +28,6 @@
                     return $turnos;
                 }
             }
-
-            $turno = new Turno($conn);
-
-            
-        ?>
+        ?>  
     </body>
 </html>
