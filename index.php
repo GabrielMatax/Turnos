@@ -16,8 +16,9 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a> </li>
-                <li><a href="pruebas.php">Turnos</a></li>
-                <li><a href="./Formulario.php">Formulario</a></li>
+                <li><a href="FormularioPacientes.php">Pacientes</a></li>
+                <li><a href="FormularioTurnos.php">Turnos</a></li>
+                <li><a href="./FormularioMedicos.php">Formulario</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
