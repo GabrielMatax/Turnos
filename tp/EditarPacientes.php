@@ -63,6 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     } else {
        echo "<a href=".$volver.">Home</a>";
     }
+
+    $conn->close();
     ?>
 </body>
 </html>

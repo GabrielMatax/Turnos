@@ -15,7 +15,7 @@
                             FROM turnos
                             LEFT JOIN medicos ON turnos.medico_id = medicos.id
                             LEFT JOIN pacientes ON turnos.paciente_id = pacientes.id
-                            WHERE turnos.paciente_id IS NOT NULL";
+                            WHERE turnos.paciente_id IS NOT NULL AND turnos.medico_id IS NOT NULL";
             
                     $result = $this->conn->query($sql);
             
@@ -28,6 +28,16 @@
                     }
             
                     return $turnos;
+                }
+
+                public function eliminarTurno($id) {
+                    $sql = "DELETE FROM turnos WHERE id = $id";
+            
+                    if ($this->conn->query($sql) === true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             }
         ?>  

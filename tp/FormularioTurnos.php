@@ -35,52 +35,38 @@
             echo "El médico no está disponible en la fecha y hora seleccionadas.";
         }
     }
-
-   /* if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $medicoId = $_POST["medico_id"];
-        $fechaHora = $_POST["fecha_hora"];
+    //ELIMINAR
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
+        $turnoId = $_GET["id"];
     
-        // Verificar disponibilidad del médico
-        
-        if ($medico->verificarDisponibilidad($medicoId, $fechaHora)) {
-            // Obtener el paciente (supongamos que ya tienes el ID del paciente)
-            $pacienteId = $_POST["paciente_id"];
-            $selectedPaciente = $paciente->obtenerPacientePorId($pacienteId);
-            
-            // Sacar turno y vincular al paciente
-            if ($selectedPaciente->sacarTurno($medicoId, $fechaHora)) {
-                echo "Turno sacado exitosamente y vinculado al paciente.";
-            } else {
-                echo "Error al sacar el turno.";
-            }
+        if ($turno->eliminarTurno($turnoId)) {
+            echo "Turno eliminado exitosamente.";
         } else {
-            echo "El médico no está disponible en esa fecha y hora.";
+            echo "Error al eliminar.";
         }
     }
-    */
     ?>
 
 <section>
     <form action="FormularioTurnos.php" method="post">
             <label>Seleccionar Médico:</label>
-            <select name="medico_id">
+            <select autofocus name="medico_id">
             <?php
-            $medicos = $medico->obtenerMedicos();
+                $medicos = $medico->obtenerMedicos();
 
-            foreach ($medicos as $med) {
-                echo "<option value='" . $med["id"] . "'>" . $med["apellido_nombre"] . "</option>";
-            }
-            
+                foreach ($medicos as $med) {
+                    echo "<option value='" . $med["id"] . "'>" . $med["apellido_nombre"] . "</option>";
+                }
             ?>
             </select><br>
             <label>Paciente:</label>
             <select name="paciente_id">
             <?php
-            $pacientes = $paciente->obtenerPacientes();
+                $ultimoPaciente = end($paciente->obtenerPacientes());
 
-            foreach ($pacientes as $pac) {
-                echo "<option value='" . $pac["id"] . "'>" . $pac["nombre"] ." ". $pac["apellido"] . "</option>";
-            }
+                if ($ultimoPaciente) {
+                    echo "<option value='" . $ultimoPaciente["id"] . "'>" . $ultimoPaciente["nombre"] ." ". $ultimoPaciente["apellido"] . "</option>";
+                }
             ?>
             </select><br>
             <br>
@@ -103,10 +89,11 @@
             echo "Paciente: " . $turno["paciente_nombre"] . "<br>";
             echo "Fecha y Hora: " . $turno["fecha_hora"] . "<br>";
             echo "Médico: " . $turno["medico_nombre"] . "<br>";
-            echo "-----------------------------------<br>";
+
+            echo "<td><a href='FormularioTurnos.php?id=" . $turno["id"] . "'>Eliminar</a></td>";
         }
     }
- //   $conn->close();
+    $conn->close();
     ?>
 </body>
 </html>

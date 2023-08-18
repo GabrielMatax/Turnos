@@ -65,6 +65,8 @@ class Medico {
     }
 
     public function eliminarMedico($id) {
+        $sqlDeleteTurnos = "DELETE FROM turnos WHERE medico_id = $id";
+        $this->conn->query($sqlDeleteTurnos);
         $sql = "DELETE FROM medicos WHERE id = $id";
 
         if ($this->conn->query($sql) === true) {
@@ -108,7 +110,6 @@ class Medico {
 
 }
 
-$medico = new Medico($conn);
 ?>
     </body>
 </html>

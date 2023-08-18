@@ -16,7 +16,6 @@
     include 'Conexion.php';
     include 'Medicos.php';
     $medico = new Medico($conn);
-    $medicos = $medico->obtenerMedicos();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $apellidoNombre = $_POST["apellido_nombre"];
@@ -25,12 +24,29 @@
         $disponibilidad = $_POST["disponibilidad"];
         $dni = $_POST["dni"];
 
-        $medico->crearMedico($apellidoNombre, $domicilio, $especialidad, $disponibilidad, $dni);
+        if ($medico->crearMedico($apellidoNombre, $domicilio, $especialidad, $disponibilidad, $dni)) {
+            echo "Paciente creado exitosamente.";
+        } else {
+            echo "Error al crear paciente.";
+        }
     }
+
+    //ELIMINAR
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
+        $medicoId = $_GET["id"];
+    
+        if ($medico->eliminarMedico($medicoId)) {
+            echo "Paciente eliminado exitosamente.";
+        } else {
+            echo "Error al eliminar paciente.";
+        }
+    }
+
+    $medicos = $medico->obtenerMedicos();
     ?>
     <h1>Gestión de Médicos</h1>
     
-    <form action="formmedicos.php" method="post">
+    <form action="FormularioMedicos.php" method="post">
         <label>Apellido y Nombre:</label>
         <input type="text" name="apellido_nombre"><br>
         
@@ -62,9 +78,12 @@
             echo "Especialidad: " . $med["especialidad"] . "<br>";
             echo "Disponibilidad: " . $med["disponibilidad"] . "<br>";
             echo "DNI: " . $med["dni"] . "<br>";
+            echo "<td><a href='EditarMedicos.php?id=" . $med["id"] . "'>Editar</a> | <a href='FormularioMedicos.php?id=" . $med["id"] . "'>Eliminar</a></td>";
             echo "-----------------------------------<br>";
         }
     }
+
+    $conn->close();
 
     ?>
     

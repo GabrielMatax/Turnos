@@ -59,6 +59,8 @@
         }
     
         public function eliminarPaciente($id) {
+            $sqlDeleteTurnos = "DELETE FROM turnos WHERE paciente_id = $id";
+            $this->conn->query($sqlDeleteTurnos);
             $sql = "DELETE FROM pacientes WHERE id = $id";
     
             if ($this->conn->query($sql) === true) {
